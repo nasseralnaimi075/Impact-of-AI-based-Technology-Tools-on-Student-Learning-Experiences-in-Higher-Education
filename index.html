@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI-Learning Experience Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hl">
+    <h1>AI-Learning <span>Experience</span> Dashboard</h1>
+    <p>The Impact of AI-Based Technology on Student Learning Experiences in Higher Education</p>
+  </div>
+  <span class="badge">MSc Computing Artefact</span>
+</header>
+
+<!-- VIEW TOGGLE -->
+<div class="view-toggle">
+  <button class="vbtn active" id="btnStudent">👩‍🎓 Student View</button>
+  <button class="vbtn" id="btnStaff">🏫 Staff / Institutional View</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <!-- Student tabs -->
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="usage">Usage Patterns</button>
+  <button class="tab-btn" data-tab="capabilities">Capabilities</button>
+  <button class="tab-btn" data-tab="ethics">Ethical Concerns</button>
+  <button class="tab-btn" data-tab="outcomes">Learning Outcomes</button>
+  <button class="tab-btn" data-tab="skills">Skills Development</button>
+  <button class="tab-btn" data-tab="satisfaction">Satisfaction</button>
+  <button class="tab-btn" data-tab="emotions">Emotions</button>
+  <button class="tab-btn" data-tab="demographics">Demographics</button>
+  <!-- Staff tabs (hidden by default) -->
+  <button class="tab-btn staff-tab" data-tab="aitoolcomparison">🔍 AI Tool Comparison</button>
+  <button class="tab-btn staff-tab" data-tab="policy">📋 Ethical-Use Policy</button>
+  <button class="tab-btn staff-tab" data-tab="recommendations">💡 Recommendations</button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- OVERVIEW -->
+  <section class="tab-panel active" id="tab-overview">
+    <div class="dnote">
+      <strong>Dataset:</strong> Global Student Perceptions of ChatGPT —
+      Ravšelj et al. (2025), <em>PLoS ONE</em> 20(2): e0315011 &nbsp;|&nbsp;
+      <strong>23,218</strong> respondents · <strong>109</strong> countries · Oct 2023 – Feb 2024
+    </div>
+    <div class="kpi-grid" id="kpi-grid">
+      <div class="loading"><div class="spin"></div>Loading…</div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>ChatGPT Usage Frequency Distribution (Q13)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('ovFreq')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="ovFreq"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Top Ethical Concerns Overview (Q22)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('ovEthics')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="ovEthics"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USAGE -->
+  <section class="tab-panel" id="tab-usage">
+    <div class="grid2">
+      <div class="card">
+        <h3>Average Usage Frequency per Activity — Q18a–Q18l (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('usageBar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="usageBar"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Average Usage Score by Field of Study — Q8</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('usageField')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="usageField"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Average Usage Score by Level of Study — Q6</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('usageLevel')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="usageLevel"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section class="tab-panel" id="tab-capabilities">
+    <div class="grid2">
+      <div class="card">
+        <h3>Perceived Capabilities of ChatGPT — Q19a–Q19j (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('capBar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="capBar"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Capability Radar Profile</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('capRadar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="capRadar"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETHICS -->
+  <section class="tab-panel" id="tab-ethics">
+    <div class="grid2">
+      <div class="card">
+        <h3>Ethical Concern Agreement Scores — Q22a–Q22j (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('ethBar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="ethBar"></canvas></div>
+      </div>
+      <div class="card card-full">
+        <h3>Ethical Concerns by Field of Study</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('ethField')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="ethField"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="tab-panel" id="tab-outcomes">
+    <div class="grid2">
+      <div class="card">
+        <h3>Perceived Learning Outcomes — Q24a–Q24g (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('outBar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="outBar"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Positive Outcomes vs Ethical Concerns</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('outVsEth')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="outVsEth"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="tab-panel" id="tab-skills">
+    <div class="grid2">
+      <div class="card">
+        <h3>Skills Development Scores — Q25a–Q25d (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('skillBar')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="skillBar"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Skills Development Radar</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('skillRadar')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="skillRadar"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SATISFACTION -->
+  <section class="tab-panel" id="tab-satisfaction">
+    <div class="grid2">
+      <div class="card">
+        <h3>Satisfaction Dimensions — Q23a–Q23d (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('satBar')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="satBar"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Satisfaction Radar</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('satRadar')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="satRadar"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMOTIONS -->
+  <section class="tab-panel" id="tab-emotions">
+    <div class="grid2">
+      <div class="card">
+        <h3>Emotions Reported While Using ChatGPT — Q30 (% selected)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('emoDough')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="emoDough"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Emotion Distribution Bar Chart</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('emoBar')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="emoBar"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMOGRAPHICS -->
+  <section class="tab-panel" id="tab-demographics">
+    <div class="grid3">
+      <div class="card">
+        <h3>Gender Distribution — Q2</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('demoGender')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="demoGender"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Level of Study — Q6</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('demoLevel')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="demoLevel"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Field of Study — Q8</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('demoField')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="demoField"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI TOOL COMPARISON (Staff) -->
+  <section class="tab-panel" id="tab-aitoolcomparison">
+    <div class="dnote">
+      <strong>Note:</strong> This dataset focuses on ChatGPT. Comparison values for other tools
+      are drawn from published benchmarks (Tan et al., 2025; Gerlich, 2025; Quratulain et al., 2025).
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>AI Tool Usage Awareness Among Students (%)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('toolAwareness')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="toolAwareness"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Perceived Usefulness by Tool (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('toolUsefulness')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="toolUsefulness"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Ethical Concern Level by Tool (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('toolEthics')">⬇ Export</button></div>
+        <div class="wrap"><canvas id="toolEthics"></canvas></div>
+      </div>
+      <div class="card card-full">
+        <h3>Primary Use Case Score per Tool (1–5 scale)</h3>
+        <div class="export-bar"><button class="export-btn" onclick="exportChart('toolUseCases')">⬇ Export</button></div>
+        <div class="wrap-tall"><canvas id="toolUseCases"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETHICAL-USE POLICY (Staff) -->
+  <section class="tab-panel" id="tab-policy">
+    <div class="dnote">
+      <strong>Institutional Ethical-Use Policy Framework</strong> — generated from survey findings.
+      Institutions may adapt these guidelines for their own AI usage policies.
+    </div>
+    <div class="policy-grid" id="policy-grid"></div>
+  </section>
+
+  <!-- RECOMMENDATIONS (Staff) -->
+  <section class="tab-panel" id="tab-recommendations">
+    <p class="section-title">Auto-Generated Institutional Recommendations (data-driven thresholds)</p>
+    <div id="rec-list" class="rec-list">
+      <div class="loading"><div class="spin"></div>Analysing data…</div>
+    </div>
+  </section>
+
+</main>
+
+<script src="dashboard.js"></script>
+</body>
+</html>
